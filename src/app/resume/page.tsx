@@ -1,62 +1,51 @@
 import { Metadata } from 'next'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
-import Footer from '@/components/Footer'
-import Link from 'next/link'
+import { PageHeader, PageSection, PillButton } from '@/components/studio'
 
 export const metadata: Metadata = {
   title: 'Resume - Raimonvibe',
-  description: 'View Raimon\'s professional resume and download his CV.',
+  description: "View Raimon's professional resume and download his CV.",
 }
 
 export default function Resume() {
   return (
-    <div id="wrapper">
-      <div id="main">
-        <div className="inner">
-          <Header title="Resume" />
-          
-          <section>
-            <header className="main">
-              <h1>Resume</h1>
-            </header>
-            
-            <div>
-              <div id="pdf-container">
-                <iframe
-                  src="/images/resume.pdf"
-                  title="Resume PDF"
-                  width="100%"
-                  height="600px"
-                  style={{border: 'none'}}
-                  loading="lazy"
-                  aria-label="Raimonvibe's Resume PDF"
-                ></iframe>
-              </div>
-              <div className="spacing"></div>
-              <div className="spacing"></div>
-            </div>
-          </section>
-
-          <div>
-            <h2>If you have ideas.</h2>
-            <p>
-              Collecting feedback from clients is a way to show that I value
-              their opinions. By asking my clients for feedback, I communicate
-              that their opinions are important to me. I involve them in
-              shaping my business, so they feel more connected to my company.
-              By listening to their voices, I can build a sustainable
-              connection with them.
-            </p>
-            <p>"We would love to hear from you."</p>
-            <ul className="actions">
-              <li><Link href="/contact" target="_blank" className="button">Contact me</Link></li>
-            </ul>
-            <div className="spacing3"></div>
-          </div>
+    <>
+      <PageHeader
+        eyebrow="CV"
+        title={
+          <>
+            Professional <em className="font-serif italic font-normal text-accent-cobalt">resume</em>
+          </>
+        }
+        description="Background, experience, and skills."
+      />
+      <PageSection>
+        <div className="mb-6 flex flex-wrap gap-3">
+          <PillButton href="/images/resume.pdf" variant="primary" external>
+            Download PDF
+          </PillButton>
+          <PillButton href="/contact" variant="secondary">
+            Get in touch
+          </PillButton>
         </div>
-      </div>
-      <Sidebar />
-    </div>
+        <div className="overflow-hidden rounded-2xl border border-ink/5 bg-white/30 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <iframe
+            src="/images/resume.pdf"
+            title="Resume PDF"
+            className="h-[70vh] min-h-[480px] w-full"
+            loading="lazy"
+            aria-label="Raimonvibe Resume PDF"
+          />
+        </div>
+        <aside className="studio-cta-card mt-12 max-w-2xl rounded-2xl border border-ink/5 bg-white/40 p-8 dark:border-white/10 dark:bg-white/5">
+          <h2 className="text-xl font-bold">
+            Interested in <em className="font-serif italic font-normal text-accent-orange">collaborating</em>?
+          </h2>
+          <p className="mt-3 text-muted dark:text-muted-dark">We would love to hear from you.</p>
+          <PillButton href="/contact" variant="primary" className="mt-5">
+            Contact me
+          </PillButton>
+        </aside>
+      </PageSection>
+    </>
   )
 }

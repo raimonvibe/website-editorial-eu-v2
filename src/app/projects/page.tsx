@@ -1,70 +1,43 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
+import { PageHeader, PageSection } from '@/components/studio'
+import ProjectPortfolio from '@/components/studio/ProjectPortfolio'
 import { PROJECTS } from '@/data/projects'
 
 export const metadata: Metadata = {
   title: 'Projects - Raimonvibe',
-  description: 'Explore Raimon\'s portfolio of technical projects and research work.',
+  description: "Explore Raimon's portfolio of technical projects and research work.",
 }
 
 export default function Projects() {
   return (
-    <div id="wrapper">
-      <div id="main">
-        <div className="inner">
-          <Header title="Projects" />
-          
-          <section>
-            <header className="major">
-              <h2>Projects</h2>
-            </header>
-            <div className="posts">
-              {PROJECTS.map((project) => (
-                <article key={project.id}>
-<a href={project.url} target="_blank" className="image">
-  <Image
-    src={project.image}
-    alt={project.alt}
-    width={400}
-    height={300}
-    style={{ width: "100%", height: "auto" }}
-  />
-</a>
-
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <ul className="actions">
-                    <li>
-                      <a
-                        href={project.url}
-                        target={project.url.startsWith('/') ? undefined : '_blank'}
-                        rel={project.url.startsWith('/') ? undefined : 'noopener noreferrer'}
-                        className="button"
-                      >
-                        {project.buttonText}
-                      </a>
-                    </li>
-                    {project.siteUrl && (
-                      <li>
-                        <a href={project.siteUrl} className="button">
-                          {project.siteButtonText ?? 'Learn more'}
-                        </a>
-                      </li>
-                    )}
-                  </ul>
-                </article>
-              ))}
-            </div>
-            <div>
-              <h2>So, have a look around!</h2>
-              <p>Feel free to explore these projects and see what you think. I'm always learning and growing, and these sites are a reflection of that journey. Who knows what I'll be working on next? Stay tuned!</p>
-            </div>
-          </section>
-        </div>
-      </div>
-      <Sidebar />
-    </div>
+    <>
+      <PageHeader
+        eyebrow="Work"
+        title={
+          <>
+            Selected <em className="font-serif italic font-normal text-accent-cobalt">projects</em>
+          </>
+        }
+        description="Experiments, tools, and research builds — always learning, always shipping."
+      />
+      <PageSection>
+        <p className="mb-8 max-w-2xl text-sm text-muted dark:text-muted-dark">
+          {PROJECTS.length} builds spanning physics simulators, scripture readers, mobile apps, and web tools.
+        </p>
+        <ProjectPortfolio
+          variant="projects"
+          items={PROJECTS}
+          footer={
+            <>
+              <h2>Keep exploring</h2>
+              <p>
+                Each project reflects a step in the journey — from classroom tools to production apps. More
+                experiments are always in progress.
+              </p>
+            </>
+          }
+        />
+      </PageSection>
+    </>
   )
 }

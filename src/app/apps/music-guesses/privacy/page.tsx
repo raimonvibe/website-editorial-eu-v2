@@ -1,7 +1,5 @@
 import { Metadata } from 'next'
-import Link from 'next/link'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
+import { PageHeader, PageSection, ProseSection, TextLink } from '@/components/studio'
 import MusicGuessesPrivacyContent from '@/components/MusicGuessesPrivacyContent'
 import { MUSIC_GUESSES } from '@/data/music-guesses'
 
@@ -20,27 +18,18 @@ export const metadata: Metadata = {
 
 export default function MusicGuessesPrivacyPage() {
   return (
-    <div id="wrapper">
-      <div id="main">
-        <div className="inner">
-          <Header title="Privacy Policy" />
-
-          <section>
-            <header className="main">
-              <h1>Privacy Policy — {MUSIC_GUESSES.name}</h1>
-            </header>
-
-            <MusicGuessesPrivacyContent />
-
-            <p>
-              <Link href={MUSIC_GUESSES.sitePath}>← {MUSIC_GUESSES.name} app page</Link>
-              {' · '}
-              <Link href="/projects">Projects</Link>
-            </p>
-          </section>
-        </div>
-      </div>
-      <Sidebar />
-    </div>
+    <>
+      <PageHeader title={`Privacy Policy — ${MUSIC_GUESSES.name}`} />
+      <PageSection>
+        <ProseSection>
+          <MusicGuessesPrivacyContent />
+          <p className="mt-8">
+            <TextLink href={MUSIC_GUESSES.sitePath}>← {MUSIC_GUESSES.name} app page</TextLink>
+            {' · '}
+            <TextLink href="/projects">Projects</TextLink>
+          </p>
+        </ProseSection>
+      </PageSection>
+    </>
   )
 }

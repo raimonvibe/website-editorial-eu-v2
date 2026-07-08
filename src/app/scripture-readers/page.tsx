@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
+import { PageHeader, PageSection } from '@/components/studio'
+import ProjectPortfolio from '@/components/studio/ProjectPortfolio'
 import { SCRIPTURE_READERS } from '@/data/scripture-readers'
 
 export const metadata: Metadata = {
@@ -12,53 +11,22 @@ export const metadata: Metadata = {
 
 export default function ScriptureReaders() {
   return (
-    <div id="wrapper">
-      <div id="main">
-        <div className="inner">
-          <Header title="Scripture Readers" />
-
-          <section>
-            <header className="major">
-              <h2>Scripture Readers</h2>
-            </header>
-            <p>
-              A collection of online readers for sacred texts — from the Jewish Tanach and
-              Christian Bible to apocryphal writings and scholarly editions. Each reader offers
-              search, chapter navigation, and a clean reading experience.
-            </p>
-            <div className="posts">
-              {SCRIPTURE_READERS.map((reader) => (
-                <article key={reader.id}>
-                  <a href={reader.url} target="_blank" rel="noopener noreferrer" className="image">
-                    <Image
-                      src={reader.image}
-                      alt={reader.alt}
-                      width={400}
-                      height={300}
-                      style={{ width: '100%', height: 'auto' }}
-                    />
-                  </a>
-                  <h3>{reader.title}</h3>
-                  <p>{reader.description}</p>
-                  <ul className="actions">
-                    <li>
-                      <a
-                        href={reader.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="button"
-                      >
-                        {reader.buttonText}
-                      </a>
-                    </li>
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-      </div>
-      <Sidebar />
-    </div>
+    <>
+      <PageHeader
+        eyebrow="Journal"
+        title={
+          <>
+            Scripture <em className="font-serif italic font-normal text-accent-sage">readers</em>
+          </>
+        }
+        description="Sacred texts with search, chapter navigation, and a calm reading experience."
+      />
+      <PageSection className="scripture-section">
+        <p className="mb-8 max-w-2xl text-sm text-muted dark:text-muted-dark">
+          Respectful editorial design — warm palettes, readable typography, and tools for study and reflection.
+        </p>
+        <ProjectPortfolio variant="scripture" items={SCRIPTURE_READERS} />
+      </PageSection>
+    </>
   )
 }

@@ -25,7 +25,7 @@ export default function PrayerChatWidget() {
 
       if (el) {
         el.innerHTML =
-          '<p style="padding:12px;background:#fff3cd;border:1px solid #ffc107;border-radius:8px;font-family:sans-serif;font-size:14px;">Chat could not load. Check browser console (F12) or Content-Security-Policy.</p>';
+          '<p style="padding:12px;background:#2a2a28;border:1px solid #555;color:#f5f4f0;border-radius:8px;font-family:sans-serif;font-size:14px;">Chat could not load. Check browser console (F12) or Content-Security-Policy.</p>';
       }
     };
 
@@ -42,7 +42,7 @@ export default function PrayerChatWidget() {
 
         if (el) {
           el.innerHTML =
-            '<p style="padding:12px;background:#f8d7da;border:1px solid #f5c6cb;border-radius:8px;font-family:sans-serif;font-size:14px;">Chat failed to start. Open console (F12) for details.</p>';
+            '<p style="padding:12px;background:#2a2a28;border:1px solid #555;color:#f5f4f0;border-radius:8px;font-family:sans-serif;font-size:14px;">Chat failed to start. Open console (F12) for details.</p>';
         }
       }
     };

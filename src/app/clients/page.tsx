@@ -1,69 +1,51 @@
 import { Metadata } from 'next'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
-import Footer from '@/components/Footer'
-import Image from 'next/image'
+import { PageHeader, PageSection } from '@/components/studio'
+import { BentoGrid, type BentoCardItem } from '@/components/studio/BentoCard'
+import { STUDIO_IMAGES } from '@/data/studio-images'
 
 export const metadata: Metadata = {
   title: 'Clients - Raimonvibe',
-  description: 'Learn about Raimon\'s client work and testimonials from satisfied customers.',
+  description: "Learn about Raimon's client work and testimonials from satisfied customers.",
 }
+
+const CLIENT_FEATURES: BentoCardItem[] = [
+  {
+    href: 'https://www.collabs.io/mag/raimonvibe/',
+    title: 'Interviewed by Collabs',
+    description: 'Featured in Collabs magazine — my story on building with technology and creativity.',
+    image: STUDIO_IMAGES.clientsCollabs,
+    imageAlt: 'Collabs magazine editorial',
+    accent: 'bg-accent-peach',
+    external: true,
+    ctaLabel: 'Read interview',
+  },
+  {
+    href: 'https://techbullion.com/is-software-development-a-dead-end-job-after-age-35/',
+    title: 'Fintech Magazine TechBullion',
+    description: 'Insights on software development careers — published by TechBullion.',
+    image: STUDIO_IMAGES.clientsTechbullion,
+    imageAlt: 'TechBullion fintech editorial',
+    accent: 'bg-accent-mustard',
+    external: true,
+    ctaLabel: 'Read article',
+  },
+]
 
 export default function Clients() {
   return (
-    <div id="wrapper">
-      <div id="main">
-        <div className="inner">
-          <Header title="Clients" />
-          
-          <section>
-            <header className="main">
-              <h1>Clients & Features</h1>
-            </header>
-
-            <div className="posts">
-              <article className="common-properties-left">
-<a href="https://www.collabs.io/mag/raimonvibe/" className="image">
-  <Image
-    src="/images/pic17.jpg"
-    alt="My company in the online magazine Collabs"
-    width={400}
-    height={300}
-    style={{ width: "100%", height: "auto" }}
-  />
-</a>
-
-                <h3>Interviewed by Collabs</h3>
-                <p>I was interviewed for the online magazine Collabs. I was very surprised when I was asked to write a story about my company. Read my story by clicking on the image.</p>
-                <ul className="actions">
-                  <li><a href="https://www.collabs.io/mag/raimonvibe/" className="button">More</a></li>
-                </ul>
-              </article>
-              <article className="common-properties-right">
-<a
-  href="https://techbullion.com/is-software-development-a-dead-end-job-after-age-35/"
-  className="image"
->
-  <Image
-    src="/images/pic18.jpg"
-    alt="My company in the online magazine TechBullion"
-    width={400}
-    height={300}
-    style={{ width: "100%", height: "auto" }}
-  />
-</a>
-
-                <h3>Fintech Magazine TechBullion</h3>
-                <p>I am honored to share that I was recently featured in Fintech Magazine with my insights, published by TechBullion. This is an important milestone in my journey and I am grateful for the opportunity to share my knowledge. Read my story by clicking on the image.</p>
-                <ul className="actions">
-                  <li><a href="https://techbullion.com/is-software-development-a-dead-end-job-after-age-35/" className="button">More</a></li>
-                </ul>
-              </article>
-            </div>
-          </section>
-        </div>
-      </div>
-      <Sidebar />
-    </div>
+    <>
+      <PageHeader
+        eyebrow="Press"
+        title={
+          <>
+            Clients &amp; <em className="font-serif italic font-normal text-accent-peach">features</em>
+          </>
+        }
+        description="Magazine interviews and published collaborations."
+      />
+      <PageSection>
+        <BentoGrid items={CLIENT_FEATURES} columns={2} />
+      </PageSection>
+    </>
   )
 }

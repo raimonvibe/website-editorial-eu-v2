@@ -1,96 +1,122 @@
 import { Metadata } from 'next'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
-import Footer from '@/components/Footer'
-import Image from 'next/image'
+import { PageHeader, PageSection, ProseSection } from '@/components/studio'
+import OrganicImage from '@/components/studio/OrganicImage'
+import { STUDIO_IMAGES } from '@/data/studio-images'
 
 export const metadata: Metadata = {
   title: 'Contact - Raimonvibe',
   description: 'Get in touch with Raimon for web development projects, collaborations, or general inquiries.',
 }
 
+const inputClass =
+  'mt-2 w-full rounded-xl border border-ink/10 bg-canvas px-4 py-3 text-ink transition focus:border-accent-cobalt/50 focus:outline-none focus:ring-2 focus:ring-accent-cobalt/20 dark:border-white/15 dark:bg-canvas-dark dark:text-ink-muted'
+
 export default function Contact() {
   return (
-    <div id="wrapper">
-      <div id="main">
-        <div className="inner">
-          <Header title="Contact" />
-          
-          <section>
-            <header className="main">
-              <h1>Contact</h1>
-            </header>
-
-            <div className="posts">
-              <article>
-                <h2>Form</h2>
-                <form method="POST" action="https://formspree.io/f/xwplqeky">
-                  <div className="fields">
-                    <div className="field half">
-                      <label htmlFor="name">Name</label>
-                      <input type="text" name="name" id="name" required />
-                    </div>
-                    <div className="field half">
-                      <label htmlFor="email">Email</label>
-                      <input type="email" name="email" id="email" required />
-                    </div>
-                    <div className="field">
-                      <label htmlFor="category">Reason for Contact</label>
-                      <select name="category" id="category" required>
-                        <option value="">- Please choose an option -</option>
-                        <option value="Landing Page Request">Request a Landing Page</option>
-                        <option value="General Inquiry">General Question or Message</option>
-                        <option value="Support or Follow-up">Follow-up / Support</option>
-                        <option value="Feedback">Give Feedback</option>
-                        <option value="Other">Something Else</option>
-                      </select>
-                    </div>              
-                    <div className="field">
-                      <label>Priority</label>
-                      <div className="field half">
-                        <input type="radio" id="priority-low" name="priority" value="Low" defaultChecked />
-                        <label htmlFor="priority-low">Low</label>
-                      </div>
-                      <div className="field half">
-                        <input type="radio" id="priority-normal" name="priority" value="Normal" />
-                        <label htmlFor="priority-normal">Normal</label>
-                      </div>
-                      <div className="field half">
-                        <input type="radio" id="priority-high" name="priority" value="High" />
-                        <label htmlFor="priority-high">High</label>
-                      </div>
-                    </div>
-                    <div className="field">
-                      <div className="field half">
-                        <input type="checkbox" id="human" name="human" />
-                        <label htmlFor="human">I am not a robot</label>
-                      </div>                  
-                    </div>
-                    <div className="field">
-                      <label htmlFor="message">Message</label>
-                      <textarea name="message" id="message" rows={5} placeholder="Enter your message" required></textarea>
-                    </div>
-                  </div>
-                  <ul className="actions">
-                    <li><input type="submit" value="Send Message" className="primary" /></li>
-                    <li><input type="reset" value="Reset" /></li>
-                  </ul>
-                </form>
-              </article>
-
-              <article>
-                <a href="#" className="image">
-                  <Image src="/images/pic21.jpg" alt="Illustration of a light bulb being screwed into a lamp shade" width={400} height={300} />
-                </a>
-                <h2>If you have ideas</h2>
-                <p>Collecting feedback from clients is a way to show that I value their opinions. By asking my clients for feedback, I communicate that their opinions are important to me. I involve them in shaping my business, so they feel more connected to my company. By listening to their voices, I can build a sustainable connection with them.</p>
-                <p>"We would love to hear from you."</p>
-              </article>
+    <>
+      <PageHeader
+        eyebrow="Contact"
+        title={
+          <>
+            Let&apos;s <em className="font-serif italic font-normal text-accent-orange">talk</em>
+          </>
+        }
+        description="Share an idea, ask a question, or start a collaboration."
+      />
+      <PageSection>
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <form
+            method="POST"
+            action="https://formspree.io/f/xwplqeky"
+            aria-label="Contact form"
+            className="studio-form space-y-5 rounded-2xl border border-ink/5 bg-white/50 p-6 dark:border-white/10 dark:bg-white/5 md:p-8"
+          >
+            <div className="grid gap-5 md:grid-cols-2">
+              <label className="block text-sm font-medium">
+                Name
+                <input type="text" name="name" required className={inputClass} />
+              </label>
+              <label className="block text-sm font-medium">
+                Email
+                <input type="email" name="email" required className={inputClass} />
+              </label>
             </div>
-          </section>
+            <label className="block text-sm font-medium">
+              Reason for contact
+              <select name="category" required className={inputClass}>
+                <option value="">— Please choose —</option>
+                <option value="Landing Page Request">Request a landing page</option>
+                <option value="General Inquiry">General question</option>
+                <option value="Support or Follow-up">Follow-up / support</option>
+                <option value="Feedback">Feedback</option>
+                <option value="Other">Something else</option>
+              </select>
+            </label>
+            <fieldset>
+              <legend className="text-sm font-medium">Priority</legend>
+              <div className="mt-2 flex flex-wrap gap-4 text-sm">
+                <label className="flex items-center gap-2">
+                  <input type="radio" name="priority" value="Low" defaultChecked />
+                  Low
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="radio" name="priority" value="Normal" />
+                  Normal
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="radio" name="priority" value="High" />
+                  High
+                </label>
+              </div>
+            </fieldset>
+            <label className="block text-sm font-medium">
+              Message
+              <textarea
+                name="message"
+                rows={5}
+                required
+                placeholder="Tell me about your project or question"
+                className={inputClass}
+              />
+            </label>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <button type="submit" className="studio-pill-btn studio-pill-btn-primary">
+                Send message ↗
+              </button>
+              <button type="reset" className="studio-pill-btn studio-pill-btn-secondary">
+                Reset
+              </button>
+            </div>
+          </form>
+
+          <div className="flex flex-col">
+            <OrganicImage
+              src={STUDIO_IMAGES.contactIdeas}
+              alt="Creative ideas concept"
+              width={600}
+              height={450}
+              mask="rounded"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              wrapperClassName="aspect-[4/3] w-full"
+              accentClassName="bg-accent-lavender/35 p-2"
+            />
+            <ProseSection className="mx-0 mt-8 max-w-none">
+              <h2>Direct reach</h2>
+              <p>
+                <a href="mailto:info@raimonvibe.com" className="font-medium text-ink underline underline-offset-4 dark:text-ink-muted">
+                  info@raimonvibe.com
+                </a>
+              </p>
+              <p className="text-sm">
+                Timpaan 1-B · 1628 MT Hoorn · Netherlands
+              </p>
+              <p className="mt-6">
+                I read every message and aim to respond within a few business days.
+              </p>
+            </ProseSection>
+          </div>
         </div>
-      </div>
-      <Sidebar />
-    </div>
+      </PageSection>
+    </>
   )
 }

@@ -1,4 +1,3 @@
-export { default as Header } from './Header'
-export { default as Sidebar } from './Sidebar'
-export { default as SidebarProjects } from './SidebarProjects'
-export { default as Footer } from './Footer'
+export { default as PrayerChatWidget } from './PrayerChatWidget'
+export { default as AnimalGuessesPrivacyContent } from './AnimalGuessesPrivacyContent'
+export { default as MusicGuessesPrivacyContent } from './MusicGuessesPrivacyContent'

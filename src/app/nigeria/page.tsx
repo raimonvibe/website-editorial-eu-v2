@@ -1,53 +1,48 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
+import { PageHeader, PageSection } from '@/components/studio'
+import ProjectPortfolio from '@/components/studio/ProjectPortfolio'
+import StatRow from '@/components/studio/StatRow'
 import { NIGERIAN_PROJECTS } from '@/data/nigerian-projects'
 
 export const metadata: Metadata = {
   title: 'Nigerian Projects - Raimonvibe',
-  description: 'Explore Raimon\'s portfolio of Nigerian-themed projects and research work.',
+  description: "Explore Raimon's portfolio of Nigerian-themed projects and research work.",
 }
 
 export default function Nigeria() {
   return (
-    <div id="wrapper">
-      <div id="main">
-        <div className="inner">
-          <Header title="Nigerian Projects" />
-          
-          <section>
-            <header className="major">
-              <h2>Nigerian Projects</h2>
-            </header>
-            <div className="posts">
-              {NIGERIAN_PROJECTS.map((project) => (
-                <article key={project.id}>
-                  <a href={project.url} target="_blank" className="image">
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      width={400}
-                      height={300}
-                      style={{ width: "100%", height: "auto" }}
-                    />
-                  </a>
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <ul className="actions">
-                    <li><a href={project.url} target="_blank" className="button">{project.buttonText}</a></li>
-                  </ul>
-                </article>
-              ))}
-            </div>
-            <div>
-              <h2>So, have a look around!</h2>
-              <p>Feel free to explore these projects and see what you think. I'm always learning and growing, and these sites are a reflection of that journey. Who knows what I'll be working on next? Stay tuned!</p>
-            </div>
-          </section>
-        </div>
-      </div>
-      <Sidebar />
-    </div>
+    <>
+      <PageHeader
+        eyebrow="Nigeria"
+        title={
+          <>
+            Built for Nigerian <em className="font-serif italic font-normal text-accent-teal">developers</em>
+          </>
+        }
+        description="Guides, tools, and resources tailored to the local tech ecosystem."
+      />
+      <PageSection>
+        <StatRow
+          stats={[
+            { value: String(NIGERIAN_PROJECTS.length), label: 'Guides & tools' },
+            { value: '1', label: 'Ecosystem focus' },
+            { value: 'Offline-first', label: 'Design principle' },
+          ]}
+        />
+        <ProjectPortfolio
+          variant="nigeria"
+          items={NIGERIAN_PROJECTS}
+          footer={
+            <>
+              <h2>Growing the ecosystem</h2>
+              <p>
+                These resources address real challenges — unreliable connectivity, payment gateways, job
+                discovery, and local healthcare navigation. More guides are on the way.
+              </p>
+            </>
+          }
+        />
+      </PageSection>
+    </>
   )
 }

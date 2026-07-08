@@ -4,24 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node cleanup-build.js",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "images:placeholders": "node scripts/setup-image-placeholders.mjs"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^7.3.0",
-    "@fortawesome/free-brands-svg-icons": "^7.2.0",
-    "@fortawesome/free-solid-svg-icons": "^7.3.0",
-    "@fortawesome/react-fontawesome": "^3.1.0",
-    "@types/jquery": "^4.0.1",
-    "flatted": "^3.4.2",
-    "immutable": "^5.1.9",
-    "jquery": "^4.0.0",
-    "minimatch": "^10.2.5",
     "next": "^16.2.9",
     "react": "^19.2.0",
-    "react-dom": "^19.2.7",
-    "sass": "^1.101.0"
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.2",

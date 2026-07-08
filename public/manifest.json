@@ -1,16 +1,22 @@
 {
-  "name": "Raimonvibe Editorial",
+  "name": "Raimonvibe",
   "short_name": "Raimonvibe",
-  "description": "Editorial website by Raimon",
+  "description": "Technical research, thoughtful builds, and digital experiences.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#f56a6a",
+  "background_color": "#F2F0E9",
+  "theme_color": "#0A0A0A",
   "icons": [
     {
       "src": "/favicon.ico",
       "sizes": "any",
       "type": "image/x-icon"
+    },
+    {
+      "src": "/images/brand/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

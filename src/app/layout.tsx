@@ -1,37 +1,41 @@
-import type { Metadata } from 'next'
-import { Open_Sans, Roboto_Slab } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { STUDIO_IMAGES } from '@/data/studio-images'
+import { Inter, Instrument_Serif } from 'next/font/google'
 import Script from 'next/script'
 import '../styles/globals.css'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import PrayerChatWidget from '../components/PrayerChatWidget'
+import SiteShell from '@/components/studio/SiteShell'
+import ThemeClientSync from '@/components/ThemeClientSync'
 
-
-
-const openSans = Open_Sans({ 
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-open-sans'
+  variable: '--font-inter',
+  display: 'swap',
 })
 
-const robotoSlab = Roboto_Slab({
-  subsets: ['latin'], 
-  weight: ['400', '700'],
-  variable: '--font-roboto-slab'
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: 'Raimonvibe Editorial',
-  description: 'Discover custom-made digital artworks with Raimon, your freelance web designer and developer from West Friesland. Specialist in responsive design and master of HTML, CSS, and JavaScript.',
-  keywords: 'freelance web designer, web developer, responsive web design, HTML, CSS, JavaScript, digital art, Raimon, custom websites, Netherlands, West Friesland',
+  description:
+    'Discover custom-made digital artworks with Raimon, your freelance web designer and developer from West Friesland. Specialist in responsive design and master of HTML, CSS, and JavaScript.',
+  keywords:
+    'freelance web designer, web developer, responsive web design, HTML, CSS, JavaScript, digital art, Raimon, custom websites, Netherlands, West Friesland',
   openGraph: {
     title: 'Home - raimonvibe',
     description: 'Technical Researcher',
     images: [
       {
-        url: 'https://raimonvibe.eu/images/cover.webp',
-        width: 966,
-        height: 1320,
+        url: `https://raimonvibe.eu${STUDIO_IMAGES.ogCover}`,
+        width: 1200,
+        height: 1680,
         alt: 'Raimonvibe Cover Image',
       },
     ],
@@ -42,23 +46,22 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Home - raimonvibe',
     description: 'Technical Researcher',
-    images: ['https://raimonvibe.eu/images/cover.webp'],
+    images: [`https://raimonvibe.eu${STUDIO_IMAGES.ogCover}`],
   },
-   icons: {
+  icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
+      { url: '/images/brand/favicon-512.png', type: 'image/png', sizes: '512x512' },
     ],
-    apple: '/apple-icon.png',
-    other: [
-      {
-        rel: 'icon',
-        type: 'image/png',
-        sizes: '192x192',
-        url: '/icon.png',
-      },
-    ],
+    apple: '/images/brand/favicon-512.png',
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F2F0E9' },
+    { media: '(prefers-color-scheme: dark)', color: '#111110' },
+  ],
 }
 
 export default function RootLayout({
@@ -67,62 +70,19 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <link rel="stylesheet" href="/fontawesome-all.min.css" />
-          <link rel="canonical" href="https://raimonvibe.eu/" />
+        <link rel="canonical" href="https://raimonvibe.eu/" />
         <link rel="alternate" hrefLang="en" href="https://raimonvibe.eu" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
-      <body className={`${openSans.variable} ${robotoSlab.variable} is-preload dark:bg-gray-900 dark:text-gray-100`}>
+      <body className={`${inter.variable} ${instrumentSerif.variable} antialiased`}>
         <ThemeProvider>
-          {children}
+          <ThemeClientSync />
+          <SiteShell>{children}</SiteShell>
         </ThemeProvider>
-        <Script
-          id="remove-preload-class"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.addEventListener('load', function() {
-                setTimeout(function() {
-                  document.body.classList.remove('is-preload');
-                }, 100);
-              });
-            `
-          }}
-        />
-        <Script
-          id="load-legacy-scripts"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function () {
-                var scripts = [
-                  "/js/jquery.min.js",
-                  "/js/browser.min.js",
-                  "/js/breakpoints.min.js",
-                  "/js/util.js",
-                  "/js/main.js"
-                ];
-
-                function loadSequentially(index) {
-                  if (index >= scripts.length) return;
-                  var script = document.createElement("script");
-                  script.src = scripts[index];
-                  script.async = false;
-                  script.onload = function () {
-                    loadSequentially(index + 1);
-                  };
-                  document.body.appendChild(script);
-                }
-
-                loadSequentially(0);
-              })();
-            `
-          }}
-        />
         <Script
           id="heap-analytics"
           strategy="afterInteractive"
@@ -163,13 +123,10 @@ export default function RootLayout({
                       heap[p[o]] = n(p[o]);
               });
               heap.load("2918829767");
-            `
-}}
+            `,
+          }}
         />
-
-
-   <PrayerChatWidget /> 
-
+        <PrayerChatWidget />
       </body>
     </html>
   )

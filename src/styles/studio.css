@@ -1,0 +1,290 @@
+@theme {
+  --color-canvas: #f2f0e9;
+  --color-canvas-dark: #111110;
+  --color-ink: #0a0a0a;
+  --color-ink-muted: #f5f4f0;
+  --color-muted: #6b6b6b;
+  --color-muted-dark: #9a9a9a;
+  --color-accent-cobalt: #1e4bff;
+  --color-accent-orange: #f24e1e;
+  --color-accent-lavender: #d6d1f5;
+  --color-accent-lime: #d4ed5d;
+  --color-accent-peach: #f5c4b8;
+  --color-accent-teal: #2ec4b6;
+  --color-accent-mustard: #e8c547;
+  --color-accent-pink: #f4a6c1;
+  --color-accent-sage: #8fa68e;
+  --color-accent-parchment: #e8e0d4;
+  --color-accent-warm-blue: #6b8fad;
+  --color-accent-canvas: #f2f0e9;
+  --radius-pill: 9999px;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    color-scheme: light dark;
+  }
+
+  .studio-shell {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .studio-shell :focus-visible {
+    outline: 2px solid var(--color-accent-cobalt);
+    outline-offset: 2px;
+  }
+
+  .studio-shell button:focus:not(:focus-visible),
+  .studio-shell a:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .studio-shell a.studio-link {
+    text-decoration: none;
+    border-bottom: none;
+    color: inherit;
+  }
+
+  .studio-prose p {
+    margin-bottom: 1.25em;
+    line-height: 1.7;
+    color: var(--color-muted);
+  }
+
+  .dark .studio-prose p {
+    color: var(--color-muted-dark);
+  }
+
+  .studio-prose h2,
+  .studio-prose h3 {
+    color: var(--color-ink);
+    font-weight: 700;
+    margin: 1.5em 0 0.75em;
+  }
+
+  .dark .studio-prose h2,
+  .dark .studio-prose h3 {
+    color: var(--color-ink-muted);
+  }
+}
+
+@layer utilities {
+  .clip-organic {
+    clip-path: polygon(
+      0% 12%,
+      8% 2%,
+      22% 0%,
+      42% 6%,
+      62% 0%,
+      82% 8%,
+      100% 4%,
+      100% 28%,
+      96% 48%,
+      100% 68%,
+      92% 88%,
+      72% 100%,
+      48% 94%,
+      24% 100%,
+      6% 90%,
+      0% 72%,
+      4% 48%
+    );
+  }
+
+  .clip-organic-alt {
+    clip-path: polygon(0% 6%, 12% 0%, 88% 4%, 100% 14%, 94% 86%, 78% 100%, 14% 96%, 0% 82%);
+  }
+
+  .clip-asymmetric {
+    border-radius: 58% 42% 38% 62% / 55% 48% 52% 45%;
+  }
+
+  .hero-mosaic-main {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 68%;
+    height: 72%;
+  }
+
+  .hero-mosaic-flower {
+    position: absolute;
+    left: 54%;
+    top: 58%;
+    z-index: 30;
+    width: 38%;
+    height: 34%;
+  }
+
+  .hero-mosaic-object {
+    position: absolute;
+    right: 0;
+    top: 6%;
+    z-index: 10;
+    width: 44%;
+    height: 50%;
+  }
+
+  .hero-mosaic-badge {
+    position: absolute;
+    bottom: 4%;
+    left: 38%;
+    z-index: 40;
+  }
+
+  .hero-mosaic-scroll {
+    position: absolute;
+    bottom: 2%;
+    right: 0;
+    z-index: 40;
+  }
+
+  .studio-feature-tile {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .studio-feature-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgb(10 10 10 / 8%);
+  }
+
+  .dark .studio-feature-tile:hover {
+    box-shadow: 0 12px 32px rgb(0 0 0 / 35%);
+  }
+
+  .studio-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+  }
+
+  .studio-pill-btn:hover {
+    opacity: 0.88;
+  }
+
+  .studio-pill-btn-primary {
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    border: none;
+  }
+
+  .dark .studio-pill-btn-primary {
+    background: var(--color-ink-muted);
+    color: var(--color-canvas-dark);
+  }
+
+  .studio-pill-btn-secondary {
+    background: transparent;
+    border: 1px solid rgb(10 10 10 / 15%);
+    color: inherit;
+  }
+
+  .studio-touch-target {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .studio-touch-target-row {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 0.5rem;
+  }
+
+  .studio-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .dark .studio-pill-btn-secondary {
+    border-color: rgb(255 255 255 / 20%);
+  }
+
+  .bento-card-project {
+    border-radius: 1rem;
+  }
+
+  .bento-card-scripture {
+    border-radius: 1.25rem;
+    background: rgb(232 224 212 / 25%);
+    border-color: rgb(143 166 142 / 20%);
+  }
+
+  .dark .bento-card-scripture {
+    background: rgb(143 166 142 / 8%);
+    border-color: rgb(255 255 255 / 8%);
+  }
+
+  .bento-card-scripture .bento-card-image {
+    border-radius: 0.875rem;
+    margin: 0.5rem;
+    width: calc(100% - 1rem);
+    aspect-ratio: 4 / 3;
+  }
+
+  .bento-card-nigeria .bento-card-cta {
+    color: var(--color-accent-teal);
+  }
+
+  .dark .bento-card-nigeria .bento-card-cta {
+    color: var(--color-accent-teal);
+  }
+
+  .animate-badge-spin {
+    animation: badge-spin 18s linear infinite;
+  }
+
+  @keyframes badge-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.7s ease-out both;
+  }
+
+  .animate-fade-up-delay-1 {
+    animation: fade-up 0.7s ease-out 0.12s both;
+  }
+
+  .animate-fade-up-delay-2 {
+    animation: fade-up 0.7s ease-out 0.24s both;
+  }
+
+  .animate-fade-up-delay-3 {
+    animation: fade-up 0.7s ease-out 0.36s both;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
