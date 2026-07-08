@@ -23,30 +23,39 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  title: 'Raimonvibe Editorial',
+  metadataBase: new URL('https://www.raimonvibe.eu'),
+  title: {
+    default: 'Raimonvibe — Technical Research Studio',
+    template: '%s',
+  },
   description:
     'Discover custom-made digital artworks with Raimon, your freelance web designer and developer from West Friesland. Specialist in responsive design and master of HTML, CSS, and JavaScript.',
   keywords:
     'freelance web designer, web developer, responsive web design, HTML, CSS, JavaScript, digital art, Raimon, custom websites, Netherlands, West Friesland',
+  alternates: {
+    canonical: './',
+  },
   openGraph: {
-    title: 'Home - raimonvibe',
-    description: 'Technical Researcher',
+    siteName: 'raimonvibe',
+    title: 'raimonvibe — Technical Research Studio',
+    description: 'Technical research, thoughtful builds, and digital experiences from West Friesland.',
     images: [
       {
-        url: `https://raimonvibe.eu${STUDIO_IMAGES.ogCover}`,
+        url: STUDIO_IMAGES.ogCover,
         width: 1200,
         height: 1680,
         alt: 'Raimonvibe Cover Image',
       },
     ],
-    url: 'https://www.raimonvibe.eu/',
+    url: './',
     type: 'website',
+    locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Home - raimonvibe',
-    description: 'Technical Researcher',
-    images: [`https://raimonvibe.eu${STUDIO_IMAGES.ogCover}`],
+    title: 'raimonvibe — Technical Research Studio',
+    description: 'Technical research, thoughtful builds, and digital experiences from West Friesland.',
+    images: [STUDIO_IMAGES.ogCover],
   },
   icons: {
     icon: [
@@ -72,20 +81,55 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https://raimonvibe.eu/" />
-        <link rel="alternate" hrefLang="en" href="https://raimonvibe.eu" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className={`${inter.variable} ${instrumentSerif.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://www.raimonvibe.eu/#website',
+                  url: 'https://www.raimonvibe.eu/',
+                  name: 'raimonvibe',
+                  description: 'Technical research, thoughtful builds, and digital experiences from West Friesland.',
+                },
+                {
+                  '@type': 'Person',
+                  '@id': 'https://www.raimonvibe.eu/#person',
+                  name: 'Raimon',
+                  url: 'https://www.raimonvibe.eu/about/',
+                  jobTitle: 'Freelance Web Designer & Developer',
+                  address: {
+                    '@type': 'PostalAddress',
+                    addressLocality: 'Hoorn',
+                    addressCountry: 'NL',
+                  },
+                  sameAs: [
+                    'https://github.com/raimonvibe/',
+                    'https://www.linkedin.com/in/raimonvibe/',
+                    'https://x.com/raimonvibe/',
+                    'https://www.youtube.com/channel/UCDGDNuYb2b2Ets9CYCNVbuA/videos/',
+                    'https://medium.com/@raimonvibe/',
+                    'https://www.instagram.com/raimonvibe/',
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
         <ThemeProvider>
           <ThemeClientSync />
           <SiteShell>{children}</SiteShell>
         </ThemeProvider>
         <Script
           id="heap-analytics"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (window.heap = window.heap || []),
